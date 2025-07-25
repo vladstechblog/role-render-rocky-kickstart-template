@@ -1,0 +1,7 @@
+---
+# defaults file for test_role
+extra_drive: false
+extra_drive_size: 20
+default_user: admin
+default_user_can_sudo_without_password: false
+primary_drive_size_gb: 80

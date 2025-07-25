@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  
+  tasks:
+  - name: Run role test
+    ansible.builtin.include_role:
+      name: role-rocky-repo-from-dvd
+      tasks_from: Linux.yml

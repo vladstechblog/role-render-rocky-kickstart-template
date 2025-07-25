@@ -1,0 +1,27 @@
+---
+# Generic Linux tasks go here
+- name: Check variable definitions
+  ansible.builtin.assert:
+    that: "{{ var_name }} is defined"
+    msg: "{{ var_name }} is undefined"
+  loop:
+    - vm_name
+    - ipv4_addr #
+    - ipv4_mask #
+    - ipv4_gate #
+    - default_user #
+    - default_user_password_hash #
+    - kickstart_output_directory #
+  loop_control:
+    loop_var: var_name
+
+- name: Create kickstart output directory if does not exits
+  ansible.builtin.file:
+    path: "{{ kickstart_output_directory }}"
+    state: directory
+
+- name: Render kickstart template
+  ansible.builtin.template:
+    src: vm.ks.j2
+    dest: "{{ kickstart_output_directory }}/{{ vm_name }}.ks"
+    mode: 0640
